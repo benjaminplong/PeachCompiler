@@ -1,4 +1,4 @@
-OBJECTS= ./build/compiler.o ./build/cprocess.o ./build/helpers/buffer.o ./build/helpers/vector.o
+OBJECTS= ./build/compiler.o	./build/cprocess.o	./build/helpers/buffer.o	./build/helpers/vector.o
 INCLUDES= -I./
 
 all: ${OBJECTS}

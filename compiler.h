@@ -20,5 +20,5 @@ struct compile_process
   FILE* ofile;
 };
 int compile_file(const char* filename, const char* out_filename, int flags);
-struct compile_process* compile_process_create(const char* filename, const char* filename_out, int flags);
+struct compile_process* compiler_process_create(const char* filename, const char* filename_out, int flags);
 #endif
