@@ -44,13 +44,13 @@ struct pos
   case '?'
 
 #define SYMBOL_CASE \
-  case '{':\
-  case '}':\
-  case ':':\
-  case ';':\
-  case '#':\
-  case '\\':\
-  case ')':\
+  case '{':         \
+  case '}':         \
+  case ':':         \
+  case ';':         \
+  case '#':         \
+  case '\\':        \
+  case ')':         \
   case ']'
 
 
