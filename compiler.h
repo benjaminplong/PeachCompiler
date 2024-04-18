@@ -100,7 +100,7 @@ enum
 struct lex_process;
 typedef char (*LEX_PROCESS_NEXT_CHAR)(struct lex_process* process);
 typedef char (*LEX_PROCESS_PEEK_CHAR)(struct lex_process* process);
-typedef char (*LEX_PROCESS_PUSH_CHAR)(struct lex_process* process, char c);
+typedef void (*LEX_PROCESS_PUSH_CHAR)(struct lex_process* process, char c);
 struct lex_process_functions
 {
   LEX_PROCESS_NEXT_CHAR next_char;
@@ -142,7 +142,7 @@ int compile_file(const char* filename, const char* out_filename, int flags);
 struct compile_process* compiler_process_create(const char* filename, const char* filename_out, int flags);
 char compile_process_next_char(struct lex_process* lex_process);
 char compile_process_peek_char(struct lex_process* lex_process);
-char compile_process_push_char(struct lex_process* lex_process, char c);
+void compile_process_push_char(struct lex_process* lex_process, char c);
 struct lex_process* lex_process_create( struct compile_process* compiler, struct lex_process_functions* functions, void* private);
 void lex_process_free(struct lex_process* process);
 void* lex_process_private(struct lex_process* process);
@@ -151,4 +151,8 @@ int lex( struct lex_process* process);
 void compiler_error(struct compile_process* compiler, const char * msg, ...);
 void compiler_warning(struct compile_process* compiler, const char * msg, ...);
 bool token_is_keyword(struct token* token, const char* value);
+/**
+ * Builds tokens for the input string
+*/
+struct lex_process* tokens_build_for_string(struct compile_process* compiler, const char* str);
 #endif
