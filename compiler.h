@@ -147,6 +147,8 @@ struct compile_process
     const char* abs_path;
   }cfile;
 
+  // a vector of tokens from lexical analysis
+  struct vector* token_vec;
   FILE* ofile;
 };
 int compile_file(const char* filename, const char* out_filename, int flags);
