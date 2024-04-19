@@ -148,9 +148,15 @@ struct compile_process
 
   // a vector of tokens from lexical analysis
   struct vector *token_vec;
+  struct vector *node_vec;
+  struct vector *node_tree_vec;
   FILE *ofile;
 };
-
+enum
+{
+  PARSE_ALL_OK,
+  PARSE_GENERAL_ERROR
+};
 enum
 {
   NODE_TYPE_EXPRESSION,
@@ -189,7 +195,7 @@ struct node
   int type;
   int flags;
 
-  struct pos;
+  struct pos pos;
 
   struct node_binded
   {
@@ -225,4 +231,5 @@ bool token_is_keyword(struct token *token, const char *value);
  * Builds tokens for the input string
  */
 struct lex_process *tokens_build_for_string(struct compile_process *compiler, const char *str);
+int parse(struct compile_process *process);
 #endif
