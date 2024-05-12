@@ -77,6 +77,10 @@ enum
   NUMBER_TYPE_FLOAT,
   NUMBER_TYPE_DOUBLE
 };
+enum
+{
+  NODE_FLAG_INSIDE_EXPRESSION = 0b00000001
+};
 struct token
 {
   int type;
@@ -208,6 +212,15 @@ struct node
 
   union
   {
+    struct exp
+    {
+      struct node *left;
+      struct node *right;
+      const char *op;
+    } exp;
+  };
+  union
+  {
     char cval;
     const char *sval;
     unsigned int inum;
@@ -231,11 +244,14 @@ bool token_is_keyword(struct token *token, const char *value);
 bool token_is_nl_or_comment_or_newline_separator(struct token *token);
 bool token_is_symbol(struct token *token, char c);
 struct node *node_create(struct node *_node);
+struct node *make_exp_node(struct node *left_node, struct node *right_node, const char *op);
 struct node *node_pop();
 struct node *node_peek();
 struct node *node_peek_or_null();
 void node_push(struct node *node);
 void node_set_vector(struct vector *vec, struct vector *root_vec);
+bool node_is_expressionable(struct node *node);
+struct node *node_peek_expressionable_or_null();
 /**
  * Builds tokens for the input string
  */
